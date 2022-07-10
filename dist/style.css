@@ -1,5 +1,5 @@
 :root {
-  --primary-dark: #333;
+  --primary-dark: #000096;
   --secondary-dark: #444;
   --primary-light: #eee;
   --secondary-light: #ddd;
@@ -59,25 +59,25 @@ i {
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px;
+  justify-content: center;
+  padding: 10px;
   background-color: var(--primary-dark);
   color: var(--primary-light);
+  
 }
 
 .logo {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.fa-check-double {
-  font-size: 40px;
+  
 }
 
 .page-name {
   font-family: "Yusei Magic", sans-serif;
   font-size: 40px;
+  
+  
 }
 
 .button-open-nav {

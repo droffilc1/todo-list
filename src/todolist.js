@@ -1,13 +1,13 @@
 import { compareAsc, toDate } from 'date-fns';
-import project from './project';
-import tasks from './tasks';
+import Project from './project';
+import Task from './tasks';
 
 export default class TodoList {
   constructor() {
     this.projects = [];
-    this.projects.push(new project('Inbox'));
-    this.projects.push(new project('Today'));
-    this.projects.push(new project('This Week'));
+    this.projects.push(new Project('Inbox'));
+    this.projects.push(new Project('Today'));
+    this.projects.push(new Project('This week'));
   }
 
   setProjects(projects) {
@@ -28,7 +28,8 @@ export default class TodoList {
 
   addProject(newProject) {
     if (this.projects.find((project) => project.name === newProject.name))
-      return this.projects.push(newProject);
+      return;
+    this.projects.push(newProject);
   }
 
   deleteProject(projectName) {
@@ -47,8 +48,8 @@ export default class TodoList {
 
       const todayTasks = project.getTasksToday();
       todayTasks.forEach((task) => {
-        const taskName = `${tasks.getName()} (${project.getName()})`;
-        this.getProject('Today').addTask(new task(taskName, task.getName()));
+        const taskName = `${task.getName()} (${project.getName()})`;
+        this.getProject('Today').addTask(new Task(taskName, task.getDate()));
       });
     });
   }
@@ -62,9 +63,9 @@ export default class TodoList {
 
       const weekTasks = project.getTasksThisWeek();
       weekTasks.forEach((task) => {
-        const tasksName = `${tasks.getName()} (${project.getName()})`;
+        const taskName = `${task.getName()} (${project.getName()})`;
         this.getProject('This week').addTask(
-          new Task(tasksName, task.getDate())
+          new Task(taskName, task.getDate())
         );
       });
     });
@@ -72,10 +73,10 @@ export default class TodoList {
     this.getProject('This week').setTasks(
       this.getProject('This week')
         .getTasks()
-        .sort((tasksA, tasksB) =>
+        .sort((taskA, taskB) =>
           compareAsc(
-            toDate(new Date(tasksA.getDateFormatted())),
-            toDate(new Date(tasksB.getDateFormatted()))
+            toDate(new Date(taskA.getDateFormatted())),
+            toDate(new Date(taskB.getDateFormatted()))
           )
         )
     );

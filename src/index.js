@@ -1,3 +1,3 @@
-import home from './home'
+import UI from './home'
 
-document.addEventListener('DOMContentLoaded', home.loadHomePage)
+document.addEventListener('DOMContentLoaded', UI.loadHomepage)
